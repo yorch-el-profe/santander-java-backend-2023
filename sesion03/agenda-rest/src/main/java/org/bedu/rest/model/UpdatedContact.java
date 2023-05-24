@@ -1,6 +1,10 @@
 package org.bedu.rest.model;
 
+import org.bedu.rest.validation.PhoneNumber;
+
 public class UpdatedContact {
+
+  @PhoneNumber
   private String number;
 
   public UpdatedContact() {

@@ -2,6 +2,7 @@ package org.bedu.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 import org.bedu.rest.model.Contact;
@@ -20,6 +24,7 @@ import org.bedu.rest.service.AgendaService;
 
 @RestController
 @RequestMapping("contacts")
+@Validated
 public class ContactController {
 
   private AgendaService agenda;
@@ -46,20 +51,20 @@ public class ContactController {
   // POST /contacts -> Crear un nuevo contacto
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Contact createContact(@RequestBody Contact contact) {
+  public Contact createContact(@Valid @RequestBody Contact contact) {
     return agenda.add(contact);
   }
 
   // PUT /contacts/{nombre} -> Actualizar un contacto
   @PutMapping("{name}")
-  public void updateContact(@RequestBody UpdatedContact contact,
+  public void updateContact(@Valid @RequestBody UpdatedContact contact,
       @PathVariable("name") String name) {
     agenda.update(name, contact);
   }
 
   // DELETE /contacts/{nombre}-> Eliminar un contacto
   @DeleteMapping("{name}")
-  public void deleteContact(@PathVariable("name") String name) {
+  public void deleteContact(@PathVariable("name") @Size(min = 3) String name) {
     agenda.remove(name);
   }
 }
