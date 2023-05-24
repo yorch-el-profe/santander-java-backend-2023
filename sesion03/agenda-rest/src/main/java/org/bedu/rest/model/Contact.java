@@ -1,5 +1,7 @@
 package org.bedu.rest.model;
 
+import org.bedu.rest.validation.PhoneNumber;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -8,8 +10,7 @@ public class Contact {
   @Size(min = 3)
   private String name;
 
-  @NotBlank
-  @Size(min = 8, max = 10)
+  @PhoneNumber
   private String number;
 
   public Contact(String name, String number) {
