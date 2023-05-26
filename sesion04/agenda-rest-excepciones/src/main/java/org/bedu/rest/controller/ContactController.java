@@ -2,7 +2,6 @@ package org.bedu.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +18,8 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
-import org.bedu.rest.exception.ContactAlreadyExistsException;
-import org.bedu.rest.exception.ContactNotFoundException;
 import org.bedu.rest.model.Contact;
 import org.bedu.rest.model.UpdatedContact;
-import org.bedu.rest.model.response.ErrorResponse;
 import org.bedu.rest.service.AgendaService;
 
 @RestController
@@ -48,31 +44,15 @@ public class ContactController {
   // GET /contacts/{nombre} -> Obtener un contacto en particular
   // GET /contacts/maria -> 5543231450
   @GetMapping("{name}")
-  public ResponseEntity<Object> getContactByName(@PathVariable("name") String name) {
-    try {
-      return ResponseEntity
-          .status(HttpStatus.OK)
-          .body(agenda.getOne(name));
-    } catch (ContactNotFoundException ex) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .body(new ErrorResponse(name + " does not exist in agenda"));
-    }
+  public Contact getContactByName(@PathVariable("name") String name) {
+    return agenda.getOne(name);
   }
 
   // POST /contacts -> Crear un nuevo contacto
   @PostMapping
-  // @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Object> createContact(@Valid @RequestBody Contact contact) {
-    try {
-      return ResponseEntity
-          .status(HttpStatus.CREATED)
-          .body(agenda.add(contact));
-    } catch (ContactAlreadyExistsException ex) {
-      return ResponseEntity
-          .status(HttpStatus.BAD_REQUEST)
-          .body(new ErrorResponse(contact.getName() + " already exists in agenda"));
-    }
+  @ResponseStatus(HttpStatus.CREATED)
+  public Contact createContact(@Valid @RequestBody Contact contact) {
+    return agenda.add(contact);
   }
 
   // PUT /contacts/{nombre} -> Actualizar un contacto

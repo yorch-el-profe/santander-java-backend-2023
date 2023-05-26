@@ -33,7 +33,7 @@ public class AgendaService {
 
   public Contact getOne(String name) {
     if (!exists(name)) {
-      throw new ContactNotFoundException();
+      throw new ContactNotFoundException(name);
     }
 
     return agenda.get(name.toLowerCase());
@@ -49,11 +49,19 @@ public class AgendaService {
   }
 
   public void update(String name, UpdatedContact contact) {
+    if (!exists(name)) {
+      throw new ContactNotFoundException(name);
+    }
+
     Contact current = agenda.get(name);
     current.setNumber(contact.getNumber());
   }
 
   public void remove(String name) {
+    if (!exists(name)) {
+      throw new ContactNotFoundException(name);
+    }
+
     agenda.remove(name);
   }
 }
