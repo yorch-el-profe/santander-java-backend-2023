@@ -1,0 +1,23 @@
+Crear un API REST sobre tipos de cambio.
+
+MXN, USD, EUR
+
+GET /currencies  -> La lista de las monedas disponibles
+
+Ejemplo de respuesta: 
+["MXN", "USD", "EUR", "CAD"]
+
+GET /currencies/MXN -> El tipo de cambio de la moneda
+
+Ejemplo: 
+{
+  "USD": 0.056,
+  "EUR": 0.052
+}
+
+GET /currencies/MXN/exchanges/20 -> El tipo de cambio de cierta cantidad de la moneda
+
+{
+  "USD": 1.12,
+  "EUR": 1.04
+}
