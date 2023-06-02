@@ -42,7 +42,7 @@ public class AuthorServiceImpl implements IAuthorService {
   }
 
   public AuthorDTO save(CreateAuthorDTO data) {
-    Author author = repository.save(new Author(0, data.getName()));
+    Author author = repository.save(mapper.toModelForSave(data));
     return mapper.toDTO(author);
   }
 }
