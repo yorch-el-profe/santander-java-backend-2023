@@ -17,7 +17,7 @@ public class AdvancedCalculatorService {
     }
 
     for (int i = n; i > 1; i--) {
-      result *= i;
+      result *= i; // result = result * i
     }
 
     return result;
