@@ -40,4 +40,8 @@ public class ProductService {
   public List<Product> findAll() {
     return db;
   }
+
+  public void save(Product data) {
+    db.add(data);
+  }
 }

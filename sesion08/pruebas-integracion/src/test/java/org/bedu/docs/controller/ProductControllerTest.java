@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -29,5 +30,27 @@ public class ProductControllerTest {
         .andExpect(MockMvcResultMatchers.status().isOk())
         .andExpect(MockMvcResultMatchers.content().string(
             "[{\"code\":\"PR001\",\"name\":\"Gansito\",\"price\":15.0,\"description\":\"Pastelito de chocolate Marinela\"},{\"code\":\"PR002\",\"name\":\"Topochico\",\"price\":19.0,\"description\":\"Agua Mineral de Manantial\"},{\"code\":\"PR003\",\"name\":\"Mazapan\",\"price\":10.0,\"description\":\"Mazapan grande\"}]"));
+  }
+
+  @Test
+  @DisplayName("should save a new product")
+  public void save() throws Exception {
+    mockMvc
+        .perform(MockMvcRequestBuilders
+            .post("/products")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(
+                "{\"code\":\"PR004\",\"name\":\"Pepsi 600ml\",\"price\":14.0,\"description\":\"Refresco de cola marca Pepsi\"}"))
+        .andExpect(MockMvcResultMatchers.status().isCreated());
+
+    /*
+     * Valida que el producto fue insertado exitosamente
+     * mockMvc
+     * .perform(MockMvcRequestBuilders.get("/products"))
+     * .andExpect(MockMvcResultMatchers.status().isOk())
+     * .andExpect(MockMvcResultMatchers.content().string(
+     * "[{\"code\":\"PR001\",\"name\":\"Gansito\",\"price\":15.0,\"description\":\"Pastelito de chocolate Marinela\"},{\"code\":\"PR002\",\"name\":\"Topochico\",\"price\":19.0,\"description\":\"Agua Mineral de Manantial\"},{\"code\":\"PR003\",\"name\":\"Mazapan\",\"price\":10.0,\"description\":\"Mazapan grande\"},{\"code\":\"PR004\",\"name\":\"Pepsi 600ml\",\"price\":14.0,\"description\":\"Refresco de cola marca Pepsi\"}]"
+     * ));
+     */
   }
 }
