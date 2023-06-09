@@ -60,7 +60,22 @@ public class ProductControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(
                 "{\"code\":\"PR004\",\"name\":\"Pepsi 600ml\",\"price\":14.0,\"description\":\"Refresco de cola marca Pepsi\"}"))
-        .andExpect(MockMvcResultMatchers.status().isCreated());
+        .andExpect(MockMvcResultMatchers.status().isCreated())
+        .andDo(MockMvcRestDocumentation.document("products/save",
+            PayloadDocumentation
+                .requestFields(
+                    PayloadDocumentation
+                        .fieldWithPath("code")
+                        .description("El identificador del producto"),
+                    PayloadDocumentation
+                        .fieldWithPath("name")
+                        .description("El nombre del producto"),
+                    PayloadDocumentation
+                        .fieldWithPath("description")
+                        .description("La descripción del producto"),
+                    PayloadDocumentation
+                        .fieldWithPath("price")
+                        .description("El precio unitario del producto"))));
 
     /*
      * Valida que el producto fue insertado exitosamente
