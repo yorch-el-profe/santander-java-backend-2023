@@ -1,0 +1,18 @@
+= API de Productos
+
+== GET /products
+
+=== Ejemplo de CURL
+include::{snippets}/products/findAll/curl-request.adoc[]
+
+=== Petición de HTTP
+include::{snippets}/products/findAll/http-request.adoc[]
+
+=== Respuesta de HTTP
+include::{snippets}/products/findAll/http-response.adoc[]
+
+=== Cuerpo de la Respuesta
+include::{snippets}/products/findAll/response-body.adoc[]
+
+=== Estructura de la Respuesta
+include::{snippets}/products/findAll/response-fields.adoc[]
