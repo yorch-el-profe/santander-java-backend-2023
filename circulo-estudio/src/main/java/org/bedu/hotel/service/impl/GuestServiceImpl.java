@@ -49,9 +49,7 @@ public class GuestServiceImpl implements IGuestService {
     }
 
     Guest guest = actual.get();
-
     mapper.toModel(guest, data);
-
     repository.save(guest);
   }
 
