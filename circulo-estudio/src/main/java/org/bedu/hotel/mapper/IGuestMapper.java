@@ -17,5 +17,6 @@ public interface IGuestMapper {
 
   // Ignora el mapeo del campo "id" en Guest
   @Mapping(target = "id", ignore = true)
+  @Mapping(source = "phoneNumber", target = "telephone")
   Guest toModel(CreateGuestDTO data);
 }

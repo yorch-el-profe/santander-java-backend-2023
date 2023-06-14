@@ -18,7 +18,7 @@ public class CreateGuestDTO {
   private int age;
 
   @Length(min = 8, max = 10)
-  private String telephone;
+  private String phoneNumber;
 
   private String address;
 }
