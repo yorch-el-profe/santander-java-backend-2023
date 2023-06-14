@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("guests")
-@Validated
 public class GuestController {
 
   private IGuestService service;
@@ -27,7 +28,7 @@ public class GuestController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public GuestDTO save(@RequestBody CreateGuestDTO data) {
+  public GuestDTO save(@Valid @RequestBody CreateGuestDTO data) {
     return service.save(data);
   }
 }

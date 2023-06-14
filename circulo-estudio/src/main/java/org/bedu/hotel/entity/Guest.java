@@ -29,7 +29,9 @@ public class Guest {
   @Column(nullable = false)
   private int age;
 
+  @Column
   private String telephone;
 
+  @Column
   private String address;
 }
